@@ -4,6 +4,7 @@ namespace Tests;
 
 use Acentrix\Transcriptions\Line;
 use Acentrix\Transcriptions\Transcription;
+use ArrayAccess;
 use PHPUnit\Framework\TestCase;
 
 class TranscriptionTest extends TestCase
@@ -56,5 +57,16 @@ class TranscriptionTest extends TestCase
         $expected = '<a href="?time=00:00">The Web is always changing</a>\n<a href="?time=00:02">and the way we access it is changing</a>';
 
         $this->assertEquals($expected, $this->transcription->lines()->asHtml());
+    }
+
+    /**
+     * @test
+     * @covers Lines ArrayAccess
+     */
+    public function it_can_access_lines_collection_using_array_notation(): void
+    {
+        $lines = $this->transcription->lines();
+
+        $this->assertInstanceOf(ArrayAccess::class, $lines);
     }
 }
