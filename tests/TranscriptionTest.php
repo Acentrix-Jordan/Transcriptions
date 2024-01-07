@@ -49,7 +49,7 @@ class TranscriptionTest extends TestCase
 
     /**
      * @test
-     * @covers Transcription::htmlLines()
+     * @covers Lines::asHtml()
      */
     public function it_renders_the_lines_as_html(): void
     {
