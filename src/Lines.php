@@ -6,11 +6,12 @@ use ArrayAccess;
 use ArrayIterator;
 use Countable;
 use IteratorAggregate;
+use JsonSerializable;
 use Traversable;
 use function array_map;
 use function implode;
 
-class Lines implements Countable, IteratorAggregate, ArrayAccess
+class Lines implements Countable, IteratorAggregate, ArrayAccess, JsonSerializable
 {
     public function __construct(protected array $lines)
     {
@@ -79,6 +80,17 @@ class Lines implements Countable, IteratorAggregate, ArrayAccess
     {
         unset($this->lines[$offset]);
     }
+
+    /**
+     * ======================
+     * =  JsonSerializable  =
+     * ======================
+     */
+    public function jsonSerialize(): mixed
+    {
+        return $this->lines;
+    }
+
 
     /**
      * Use as a string

@@ -5,7 +5,9 @@ namespace Tests;
 use Acentrix\Transcriptions\Line;
 use Acentrix\Transcriptions\Transcription;
 use ArrayAccess;
+use JsonSerializable;
 use PHPUnit\Framework\TestCase;
+use function json_encode;
 
 class TranscriptionTest extends TestCase
 {
@@ -68,5 +70,17 @@ class TranscriptionTest extends TestCase
         $lines = $this->transcription->lines();
 
         $this->assertInstanceOf(ArrayAccess::class, $lines);
+    }
+
+    /**
+     * @test
+     * @covers Lines JsonSerializable
+     */
+    function is_can_render_as_json()
+    {
+        $lines = $this->transcription->lines();
+
+        $this->assertInstanceOf(JsonSerializable::class, $lines);
+        $this->assertJson(json_encode($lines));
     }
 }
